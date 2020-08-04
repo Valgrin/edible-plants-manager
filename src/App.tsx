@@ -8,22 +8,25 @@ import "mobx-react-lite/batchingForReactDom"
 type Vegetable = {
     id: string
     kind: "vegetable" | "fruit"
+    wikidata_id: string
     available_months: number[]
 }
 
-const cucmber: Vegetable = {
+const cucumber: Vegetable = {
     id: "cucumber",
     kind: "vegetable",
+    wikidata_id: "Q2735883",
     available_months: [1, 2, 3, 4, 5, 6, 7],
 }
 
 const banana: Vegetable = {
     id: "banana",
     kind: "fruit",
+    wikidata_id: "Q503",
     available_months: [1, 2, 3, 4, 5, 6, 7],
 }
 
-const getInitialEntries = () => [cucmber, banana]
+const getInitialEntries = () => [cucumber, banana]
 class St {
     @observable pretty: boolean = false
 
@@ -37,6 +40,7 @@ class St {
             available_months: [],
             id: "",
             kind: "fruit",
+            wikidata_id: ""
         }
         this.entries.push(newVegetable)
     }
@@ -125,6 +129,7 @@ const EntryUI = observer(function EntryUI(props: {
                 {entry.kind === "fruit" ? emoji("🍑") : emoji("🍆")}
             </div>
             {inputText(entry, "id")}
+            {inputText(entry, "wikidata_id")}
             {inputMonths(entry)}
         </div>
     )
